@@ -49,6 +49,22 @@ def background():
     glVertex2f(1280, 0)
     glVertex2f(0, 0)
     glEnd()
+    
+    #PEMBATAS
+    glColor3ub(0, 0, 0)
+    glBegin(GL_QUADS)
+    glVertex2f(0, 210)
+    glVertex2f(0, 225)
+    glVertex2f(1280, 225)
+    glVertex2f(1280, 210)
+    glEnd()
+    glColor3ub(0, 0, 0)
+    glBegin(GL_QUADS)
+    glVertex2f(0, 10)
+    glVertex2f(0, 25)
+    glVertex2f(1280, 25)
+    glVertex2f(1280, 10)
+    glEnd()
 
 def garisjalan():
     #ArenaBawah
@@ -223,7 +239,7 @@ def awanTrans():
     glPushMatrix()
     glTranslatef(intTransAwan, 0, 1)
     Awan()
-    intTransAwan = intTransAwan + 1
+    intTransAwan = intTransAwan - 1
     glPopMatrix()
     glFlush()
 
