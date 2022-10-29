@@ -2,6 +2,7 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
+intTransAwan = 0
 w,h= 1280,720
 
 def background():
@@ -24,6 +25,7 @@ def background():
     glEnd()
 
     #RUMPUT
+    #TENGAH
     glColor3ub(50, 205, 50)
     glBegin(GL_QUADS)
     glVertex2f(0, 120)
@@ -31,6 +33,7 @@ def background():
     glVertex2f(1280, 100)
     glVertex2f(0, 100)
     glEnd()
+    #ATAS
     glColor3ub(50, 205, 50)
     glBegin(GL_QUADS)
     glVertex2f(0, 220)
@@ -38,6 +41,7 @@ def background():
     glVertex2f(1280, 200)
     glVertex2f(0, 200)
     glEnd()
+    #BAWAH
     glColor3ub(50, 205, 50)
     glBegin(GL_QUADS)
     glVertex2f(0, 20)
@@ -46,7 +50,102 @@ def background():
     glVertex2f(0, 0)
     glEnd()
 
+def Awan():
+    #AWAN
+    glColor3ub(255, 255, 255)
+    glBegin(GL_QUADS)
+    glVertex2f(100, 450)
+    glVertex2f(200, 450)
+    glVertex2f(200, 500)
+    glVertex2f(100, 500)
+    glEnd()
+    glColor3ub(255, 255, 255)
+    glBegin(GL_QUADS)
+    glVertex2f(240, 600)
+    glVertex2f(280, 600)
+    glVertex2f(280, 580)
+    glVertex2f(240, 580)
+    glEnd()
+    glColor3ub(255, 255, 255)
+    glBegin(GL_QUADS)
+    glVertex2f(500, 550)
+    glVertex2f(650, 550)
+    glVertex2f(650, 500)
+    glVertex2f(500, 500)
+    glEnd()
+    glColor3ub(255, 255, 255)
+    glBegin(GL_QUADS)
+    glVertex2f(850, 600)
+    glVertex2f(1050, 600)
+    glVertex2f(1050, 550)
+    glVertex2f(850, 550)
+    glEnd()
+    glColor3ub(255, 255, 255)
+    glBegin(GL_QUADS)
+    glVertex2f(950, 450)
+    glVertex2f(1000, 450)
+    glVertex2f(1000, 400)
+    glVertex2f(950, 400)
+    glEnd()
+    glColor3ub(255, 255, 255)
+    glBegin(GL_QUADS)
+    glVertex2f(1060, 550)
+    glVertex2f(1120, 550)
+    glVertex2f(1120, 520)
+    glVertex2f(1060, 520)
+    glEnd()
+    glColor3ub(255, 255, 255)
+    glBegin(GL_QUADS)
+    glVertex2f(1160, 450)
+    glVertex2f(1220, 450)
+    glVertex2f(1220, 420)
+    glVertex2f(1160, 420)
+    glEnd()
+    glColor3ub(255, 255, 255)
+    glBegin(GL_QUADS)
+    glVertex2f(800, 400)
+    glVertex2f(860, 400)
+    glVertex2f(860, 370)
+    glVertex2f(800, 370)
+    glEnd()
+    glColor3ub(255, 255, 255)
+    glBegin(GL_QUADS)
+    glVertex2f(380, 400)
+    glVertex2f(450, 400)
+    glVertex2f(450, 370)
+    glVertex2f(380, 370)
+    glEnd()
 
+def PointSoal():
+    #POINTSOAL
+    glColor3ub(211, 211, 211)
+    glBegin(GL_QUADS)
+    glVertex2f(630, 110)
+    glVertex2f(630, 140)
+    glVertex2f(650, 140)
+    glVertex2f(650, 110)
+    glEnd()
+    glColor3ub(255, 165, 0)
+    glBegin(GL_QUADS)
+    glVertex2f(610, 140)
+    glVertex2f(670, 140)
+    glVertex2f(670, 180)
+    glVertex2f(610, 180)
+    glEnd()
+
+def awanTrans():
+    global intTransAwan
+    glPushMatrix()
+    glTranslatef(intTransAwan, 0, 1)
+    Awan()
+    intTransAwan = intTransAwan + 1
+    glPopMatrix()
+    glFlush()
+
+def Timer():
+    glutPostRedisplay()
+    glutTimerFunc(20, Timer, 10)
+    glFlush()
 
 def iterate():
     glViewport(0, 0, 1280, 720) 
@@ -61,6 +160,9 @@ def showScreen():
     glLoadIdentity()
     iterate()
     background()
+    # Awan()
+    awanTrans()
+    PointSoal()
     # glColor3ub(38, 38, 30)
     # square()
     glFlush()
@@ -75,7 +177,7 @@ def Main():
     glutDisplayFunc(showScreen)
     # glutMouseFunc(iniHandleMouse)
     # glutPassiveMotionFunc(mouseFunc)
-    # glutTimerFunc(50, update, 0)
+    glutTimerFunc(20, Timer, 10)
     # timer(0)
     glutIdleFunc(showScreen)
     glutMainLoop()
