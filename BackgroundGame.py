@@ -9,14 +9,16 @@ intTransAwan = 0
 w,h= 1280,720
 
 jedag, jedug = 1,1
-
-kecepatan_awan = 5
+x = 50
+kecepatan = 1
 pos_x_awan = 0
 pos_y_awan = 0
 pos_x_gjalan = 0
 pos_y_gjalan = 0
-pos_x_gkota = 0
-pos_y_gkota = 0
+pos_x_gkota1 = 20
+pos_y_gkota1 = 0
+pos_x_gkota2 = 1900
+pos_y_gkota2 = 0
 
 pos_x_pemain = 0
 pos_y_pemain = -500
@@ -89,18 +91,46 @@ def Jalan():
     glVertex2f(0, 0)
     glEnd()
     
-def kota():
-    global pos_x_gkota, pos_y_gkota
-    glTranslated(pos_x_gkota,pos_y_gkota,0)
+def kotaktengah(kcx):
+    glPushMatrix()
+    glColor3ub(64,64,64)
+    glLineWidth(30)
+    glBegin(GL_LINES)
+    glVertex2f(0, kcx) 
+    glVertex2f(12800, kcx)
+    glEnd()
+    glPopMatrix()
+
+def GarisJalan(kck, kcy):
+    global x
+    glTranslated(x,0,0)
+    glColor3ub(255, 255, 255)
+    glLineWidth(15)
+    glBegin(GL_LINES)
+    glVertex2f(kck, kcy)
+    glVertex2f(kck + 120, kcy)
+    glEnd()
+
+def gjalan():
+    global x, kecepatan
+    kotaktengah(110)
+    kck = 20 # y pertama dari garis mid
+    for i in range(100): #garis mid dibentuk sebanyak 7 menggunakan perulangan for
+        GarisJalan(kck,110)
+        kck += 120
+
+def kota1():
+    global pos_x_gkota1, pos_y_gkota1
+    glColor3ub(160, 160, 160)
+    glTranslated(pos_x_gkota1,pos_y_gkota1,0)
 
     #gimana apel bisa jatuh
-    pos_x_gkota -= 0.5
+    pos_x_gkota1 -= kecepatan
 
     #kalo dah sampe bawah bikin dari atas lagi
-    if pos_x_gkota < -1135:
-        pos_x_gkota = 80
+    if pos_x_gkota1 < -1135:
+        pos_x_gkota1 = -100
     #gedung 1
-    glColor3ub(160, 160, 160)
     glBegin(GL_QUADS)
     glVertex2f(0, 210)
     glVertex2f(0, 400)
@@ -268,6 +298,184 @@ def kota():
     glVertex2f(-130, 210)
     glEnd()
 
+def kota2():
+    global pos_x_gkota2, pos_y_gkota2
+    glColor3ub(160, 160, 160)
+    glTranslated(pos_x_gkota2,pos_y_gkota2,0)
+
+    #gimana apel bisa jatuh
+    pos_x_gkota2 -= 0.5
+
+    #kalo dah sampe bawah bikin dari atas lagi
+    if pos_x_gkota2 < -1135:
+        pos_x_gkota2 = 1900
+    #gedung 1
+    glBegin(GL_QUADS)
+    glVertex2f(0, 210)
+    glVertex2f(0, 400)
+    glVertex2f(150, 400)
+    glVertex2f(150, 210)
+
+    glVertex2f(70, 400)
+    glVertex2f(100, 430)
+    glVertex2f(140, 430)
+    glVertex2f(140, 400)
+    glEnd()
+
+    #gedung 2
+    glColor3ub(160, 160, 160)
+    glBegin(GL_QUADS)
+    glVertex2f(150, 210)
+    glVertex2f(150, 340)
+    glVertex2f(280, 340)
+    glVertex2f(280, 210)
+    glEnd()
+
+    #gedung 3
+    glColor3ub(160, 160, 160)
+    glBegin(GL_QUADS)
+    glVertex2f(300, 210)
+    glVertex2f(300, 500)
+    glVertex2f(500, 500)
+    glVertex2f(500, 210)
+
+    glVertex2f(320, 500)
+    glVertex2f(320, 550)
+    glVertex2f(370, 550)
+    glVertex2f(370, 500)
+
+    glVertex2f(370, 500)
+    glVertex2f(370, 518)
+    glVertex2f(400, 518)
+    glVertex2f(400, 500)
+    glEnd()
+
+    #gedung 4
+    glColor3ub(160, 160, 160)
+    glBegin(GL_QUADS)
+    glVertex2f(500, 210)
+    glVertex2f(500, 380)
+    glVertex2f(600, 380)
+    glVertex2f(600, 210)
+    glEnd()  
+
+    #gedung 5
+    glColor3ub(160, 160, 160)
+    glBegin(GL_QUADS)
+    glVertex2f(600, 210)
+    glVertex2f(600, 450)
+    glVertex2f(730, 450)
+    glVertex2f(730, 210)
+    glEnd() 
+
+    #gedung 6
+    glColor3ub(160, 160, 160)
+    glBegin(GL_QUADS)
+    glVertex2f(780, 210)
+    glVertex2f(780, 260)
+    glVertex2f(880, 260)
+    glVertex2f(880, 210)
+
+    glVertex2f(760, 260)
+    glVertex2f(780, 300)
+    glVertex2f(880, 300)
+    glVertex2f(900, 260)
+    glEnd() 
+
+    #gedung 7
+    glColor3ub(160, 160, 160)
+    glBegin(GL_QUADS)
+    glVertex2f(900, 210)
+    glVertex2f(900, 400)
+    glVertex2f(1020, 400)
+    glVertex2f(1020, 210)
+    glEnd()
+
+    #gedung 8
+    glColor3ub(160, 160, 160)
+    glBegin(GL_QUADS)
+    glVertex2f(1040, 210)
+    glVertex2f(1040, 450)
+    glVertex2f(1150, 450)
+    glVertex2f(1150, 210)
+    glEnd()
+
+    #gedung 9
+    glColor3ub(160, 160, 160)
+    glBegin(GL_QUADS)
+    glVertex2f(1200, 210)
+    glVertex2f(1200, 400)
+    glVertex2f(1320, 400)
+    glVertex2f(1320, 210)
+    glEnd()
+
+    #gedung 10
+    glColor3ub(160, 160, 160)
+    glBegin(GL_QUADS)
+    glVertex2f(1350, 210)
+    glVertex2f(1350, 500)
+    glVertex2f(1500, 500)
+    glVertex2f(1500, 210)
+    glEnd()
+
+    #gedung 11
+    glColor3ub(160, 160, 160)
+    glBegin(GL_QUADS)
+    glVertex2f(1550, 210)
+    glVertex2f(1550, 550)
+    glVertex2f(1750, 550)
+    glVertex2f(1750, 210)
+    glEnd()
+
+    #gedung 12
+    glColor3ub(160, 160, 160)
+    glBegin(GL_QUADS)
+    glVertex2f(1780, 210)
+    glVertex2f(1780, 260)
+    glVertex2f(1860, 260)
+    glVertex2f(1860, 210)
+
+    glVertex2f(1780, 260)
+    glVertex2f(1800, 300)
+    glVertex2f(1840, 300)
+    glVertex2f(1860, 260)
+    glEnd()
+
+    #gedung 13
+    glColor3ub(160, 160, 160)
+    glBegin(GL_QUADS)
+    glVertex2f(1860, 210)
+    glVertex2f(1860, 400)
+    glVertex2f(2000, 400)
+    glVertex2f(2000, 210)
+    glEnd()
+
+    #gedung 14
+    glColor3ub(160, 160, 160)
+    glBegin(GL_QUADS)
+    glVertex2f(2020, 210)
+    glVertex2f(2020, 500)
+    glVertex2f(2200, 500)
+    glVertex2f(2200, 210)
+    glEnd()
+
+    #gedung 15
+    glColor3ub(160, 160, 160)
+    glBegin(GL_QUADS)
+    glVertex2f(2200, 210)
+    glVertex2f(2200, 400)
+    glVertex2f(2340, 400)
+    glVertex2f(2340, 210)
+    glEnd()
+
+    #gedung 0
+    glColor3ub(160, 160, 160)
+    glBegin(GL_QUADS)
+    glVertex2f(-10, 210)
+    glVertex2f(-10, 400)
+    glVertex2f(-130, 400)
+    glVertex2f(-130, 210)
+    glEnd()
 
 def pembatas():
     #PEMBATAS
@@ -295,7 +503,7 @@ def garisjalan():
 
     #kalo dah sampe bawah bikin dari atas lagi
     if pos_x_gjalan < -650:
-        pos_x_gjalan = 600
+        pos_x_gjalan = 100
     #ArenaBawah
     glColor3ub(255, 255, 255)
     glBegin(GL_QUADS)
@@ -375,7 +583,7 @@ def Awan():
     glTranslated(pos_x_awan,pos_y_awan,0)
 
     #gimana apel bisa jatuh
-    pos_x_awan -= 0.5
+    pos_x_awan -= kecepatan
 
     #kalo dah sampe bawah bikin dari atas lagi
     if pos_x_awan < -650:
@@ -472,9 +680,9 @@ def PoinFinish():
     glVertex2f(900, 110)
     glEnd()
 
-def Timer():
+def timer(value):
     glutPostRedisplay()
-    glutTimerFunc(20, Timer, 10)
+    glutTimerFunc(20, timer, 10)
     glFlush()
 
 def iterate():
@@ -485,22 +693,20 @@ def iterate():
     glMatrixMode (GL_MODELVIEW) 
     glLoadIdentity()
 
+def GameMulai():
+    langit()
+    Jalan()
+    kota1()
+    # kota2()
+    pembatas()
+    gjalan()
+
 def showScreen():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) 
     glLoadIdentity()
     iterate()
-    MainMenu()
-    langit()
-    Jalan()
-    kota()
-    pembatas()
-    garisjalan()
+    GameMulai()
     Awan()
-    # PointSoal()
-    # PoinFinish()
-    # awanTrans()
-    # glColor3ub(38, 38, 30)
-    # square()
     glFlush()
     glutSwapBuffers()
 
@@ -513,7 +719,7 @@ def Main():
     glutDisplayFunc(showScreen)
     # glutMouseFunc(iniHandleMouse)
     # glutPassiveMotionFunc(mouseFunc)
-    glutTimerFunc(20, Timer, 10)
+    glutTimerFunc(20, timer, 10)
     # timer(0)
     glutIdleFunc(showScreen)
     glutMainLoop()
