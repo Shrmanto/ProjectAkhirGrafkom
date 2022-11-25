@@ -2,8 +2,44 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
+import random as rd, os
+os.system('cls')
+
 intTransAwan = 0
 w,h= 1280,720
+
+jedag, jedug = 1,1
+
+kecepatan_awan = 5
+pos_x_awan = 0
+pos_y_awan = 0
+pos_x_gjalan = 0
+pos_y_gjalan = 0
+
+pos_x_pemain = 0
+pos_y_pemain = -500
+
+def MainMenu():
+    global jedag,jedug
+    #M
+    glTranslated(0,rd.randrange(-jedag,jedug),0)
+    glBegin(GL_LINE_LOOP)
+    glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
+    glVertex2f(3.576757916323,5.5896610088214)
+    glVertex2f(4.0130331519056,5.5896610088214)
+    glVertex2f(4.3869833538336,4.8417606049654)
+    glVertex2f(4.7609335557616,5.5896610088214)
+    glVertex2f(5.2387588137807,5.5896610088214)
+    glVertex2f(5.0102336903803,4.5509104479103)
+    glVertex2f(5.1972087913443,4.0107601562365)
+    glVertex2f(4.5947334660158,4.0107601562365)
+    glVertex2f(4.6570584996705,4.6340104927832)#1
+    glVertex2f(4.2623332865243,4.1977352572005)
+    glVertex2f(3.950708118251,4.8002105825289)
+    glVertex2f(3.7221829948505,3.9899851450183)
+    glVertex2f(3.2235827256132,4.0107601562365)
+    glVertex2f(3.5975329275412,4.8002105825289)
+    glEnd()
 
 def background():
     #LANGIT
@@ -26,13 +62,13 @@ def background():
 
     #RUMPUT
     #TENGAH
-    glColor3ub(50, 205, 50)
-    glBegin(GL_QUADS)
-    glVertex2f(0, 120)
-    glVertex2f(1280, 120)
-    glVertex2f(1280, 100)
-    glVertex2f(0, 100)
-    glEnd()
+    # glColor3ub(50, 205, 50)
+    # glBegin(GL_QUADS)
+    # glVertex2f(0, 120)
+    # glVertex2f(1280, 120)
+    # glVertex2f(1280, 100)
+    # glVertex2f(0, 100)
+    # glEnd()
     #ATAS
     glColor3ub(50, 205, 50)
     glBegin(GL_QUADS)
@@ -67,81 +103,99 @@ def background():
     glEnd()
 
 def garisjalan():
+    global pos_x_gjalan, pos_y_gjalan
+    glTranslated(pos_x_gjalan,pos_y_gjalan,0)
+
+    #gimana apel bisa jatuh
+    pos_x_gjalan -= 0.5
+
+    #kalo dah sampe bawah bikin dari atas lagi
+    if pos_x_gjalan < -650:
+        pos_x_gjalan = 600
     #ArenaBawah
     glColor3ub(255, 255, 255)
     glBegin(GL_QUADS)
-    glVertex2f(50, 50)
-    glVertex2f(50, 70)
-    glVertex2f(170, 70)
-    glVertex2f(170, 50)
+    glVertex2f(50, 60)
+    glVertex2f(50, 80)
+    glVertex2f(170, 80)
+    glVertex2f(170, 60)
     glEnd()
     glColor3ub(255, 255, 255)
     glBegin(GL_QUADS)
-    glVertex2f(300, 50)
-    glVertex2f(300, 70)
-    glVertex2f(420, 70)
-    glVertex2f(420, 50)
+    glVertex2f(300, 60)
+    glVertex2f(300, 80)
+    glVertex2f(420, 80)
+    glVertex2f(420, 60)
     glEnd()
     glColor3ub(255, 255, 255)
     glBegin(GL_QUADS)
-    glVertex2f(550, 50)
-    glVertex2f(550, 70)
-    glVertex2f(670, 70)
-    glVertex2f(670, 50)
+    glVertex2f(550, 60)
+    glVertex2f(550, 80)
+    glVertex2f(670, 80)
+    glVertex2f(670, 60)
     glEnd()
     glColor3ub(255, 255, 255)
     glBegin(GL_QUADS)
-    glVertex2f(800, 50)
-    glVertex2f(800, 70)
-    glVertex2f(920, 70)
-    glVertex2f(920, 50)
+    glVertex2f(800, 60)
+    glVertex2f(800, 80)
+    glVertex2f(920, 80)
+    glVertex2f(920, 60)
     glEnd()
     glColor3ub(255, 255, 255)
     glBegin(GL_QUADS)
-    glVertex2f(1050, 50)
-    glVertex2f(1050, 70)
-    glVertex2f(1170, 70)
-    glVertex2f(1170, 50)
+    glVertex2f(1050, 60)
+    glVertex2f(1050, 80)
+    glVertex2f(1170, 80)
+    glVertex2f(1170, 60)
     glEnd()
 
     #ArenaAtas
     glColor3ub(255, 255, 255)
     glBegin(GL_QUADS)
-    glVertex2f(50, 150)
-    glVertex2f(50, 170)
-    glVertex2f(170, 170)
-    glVertex2f(170, 150)
+    glVertex2f(50, 140)
+    glVertex2f(50, 160)
+    glVertex2f(170, 160)
+    glVertex2f(170, 140)
     glEnd()
     glColor3ub(255, 255, 255)
     glBegin(GL_QUADS)
-    glVertex2f(300, 150)
-    glVertex2f(300, 170)
-    glVertex2f(420, 170)
-    glVertex2f(420, 150)
+    glVertex2f(300, 140)
+    glVertex2f(300, 160)
+    glVertex2f(420, 160)
+    glVertex2f(420, 140)
     glEnd()
     glColor3ub(255, 255, 255)
     glBegin(GL_QUADS)
-    glVertex2f(550, 150)
-    glVertex2f(550, 170)
-    glVertex2f(670, 170)
-    glVertex2f(670, 150)
+    glVertex2f(550, 140)
+    glVertex2f(550, 160)
+    glVertex2f(670, 160)
+    glVertex2f(670, 140)
     glEnd()
     glColor3ub(255, 255, 255)
     glBegin(GL_QUADS)
-    glVertex2f(800, 150)
-    glVertex2f(800, 170)
-    glVertex2f(920, 170)
-    glVertex2f(920, 150)
+    glVertex2f(800, 140)
+    glVertex2f(800, 160)
+    glVertex2f(920, 160)
+    glVertex2f(920, 140)
     glEnd()
     glColor3ub(255, 255, 255)
     glBegin(GL_QUADS)
-    glVertex2f(1050, 150)
-    glVertex2f(1050, 170)
-    glVertex2f(1170, 170)
-    glVertex2f(1170, 150)
+    glVertex2f(1050, 140)
+    glVertex2f(1050, 160)
+    glVertex2f(1170, 160)
+    glVertex2f(1170, 140)
     glEnd()
 
 def Awan():
+    global pos_x_awan, pos_y_awan
+    glTranslated(pos_x_awan,pos_y_awan,0)
+
+    #gimana apel bisa jatuh
+    pos_x_awan -= 0.5
+
+    #kalo dah sampe bawah bikin dari atas lagi
+    if pos_x_awan < -650:
+        pos_x_awan = 600
     #AWAN
     glColor3ub(255, 255, 255)
     glBegin(GL_QUADS)
@@ -234,15 +288,6 @@ def PoinFinish():
     glVertex2f(900, 110)
     glEnd()
 
-def awanTrans():
-    global intTransAwan
-    glPushMatrix()
-    glTranslatef(intTransAwan, 0, 1)
-    Awan()
-    intTransAwan = intTransAwan - 1
-    glPopMatrix()
-    glFlush()
-
 def Timer():
     glutPostRedisplay()
     glutTimerFunc(20, Timer, 10)
@@ -260,12 +305,13 @@ def showScreen():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) 
     glLoadIdentity()
     iterate()
+    MainMenu()
     background()
     garisjalan()
-    # Awan()
-    PointSoal()
-    PoinFinish()
-    awanTrans()
+    Awan()
+    # PointSoal()
+    # PoinFinish()
+    # awanTrans()
     # glColor3ub(38, 38, 30)
     # square()
     glFlush()
