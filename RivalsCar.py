@@ -12,13 +12,15 @@ tr = 600
 xPlayer = 0
 yPlayer = 10
 
+border_y = [0, 150, 0, 100]
+
 grid_player = [0,140, 0,150]
 crash_Player = False
 
 x = 10
 yRPlayer = rd.randrange(55, 65)
 kecepatan = 10
-RKecepatan = 0.4
+RKecepatan = 0.6
 cekPoint = 30
 cekX = 10
 cek_Kecepatan = 5000
@@ -175,16 +177,12 @@ def GMidJalan(kx, ky):
 
 def Rintangan(y):
     glPushMatrix()
-    global xRintangan, yRPlayer, xPlayer, yPlayer, crash_Player
+    global xRintangan, yRPlayer, xPlayer, yPlayer, crash_Player, border_y, border__y
 
     xRintangan -= RKecepatan
-    if xRintangan < -400:
+    if xRintangan < -400 and y < border_y[1] or y < border_y[0]:
         yRPlayer = rd.randrange(y -30, y +10)
         xRintangan = w
-
-    offset = 50
-    if xRintangan in range (xPlayer-offset, xPlayer+offset) and  y in range (yPlayer-offset, yPlayer+offset):
-        crash_Player = True
 
     glTranslated(xRintangan,y,0)
     glPointSize(50)
