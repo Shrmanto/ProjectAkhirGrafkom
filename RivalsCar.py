@@ -7,20 +7,25 @@ os.system('cls')
 w, h = 600, 500
 
 play = False
-xRintangan = 150 #Rintangan Jalan Kesamping
+xRintangan = 50 #Rintangan Jalan Kesamping
+yRintangan = 150
+
 tr = 600
 xPlayer = 0
 yPlayer = 10
 
+selesai = False
+
 border_y = [0, 150, 0, 100]
 
-grid_player = [0,140, 0,150]
+grid_x_player = [550,0, 600,0]
+grid_y_player = [0,140, 0,150]
 crash_Player = False
 
 x = 10
-yRPlayer = rd.randrange(55, 65)
-kecepatan = 10
-RKecepatan = 0.6
+yRPlayer = rd.randrange(55, 65, 10)
+kecepatan = 3
+RKecepatan = 0.7
 cekPoint = 30
 cekX = 10
 cek_Kecepatan = 5000
@@ -29,7 +34,6 @@ ScorePlayer = 0
 Level = 1
 
 cekLev = 1
-
 
 def drawText(ch,xpos,ypos,r,b,g):
     color = (r, b, g)
@@ -104,6 +108,7 @@ def kota(zx, vy):
     glPopMatrix()
 
 def transKota():
+    
     def kota1():
         kota(0,0)
     def kota2():
@@ -177,12 +182,28 @@ def GMidJalan(kx, ky):
 
 def Rintangan(y):
     glPushMatrix()
-    global xRintangan, yRPlayer, xPlayer, yPlayer, crash_Player, border_y, border__y
+    global xRintangan, yRPlayer, xPlayer, yPlayer, crash_Player, border_y
+
+    if not selesai:
+        if y > 150:
+            y = 150
+        if y < 20:
+            y = 20
 
     xRintangan -= RKecepatan
     if xRintangan < -400 and y < border_y[1] or y < border_y[0]:
-        yRPlayer = rd.randrange(y -30, y +10)
+        yRPlayer = rd.randrange(y -10, y +5, 10)
+        # yRPlayer = rd.randrange(65, 55, 10)
+        y = yRPlayer
         xRintangan = w
+        y = border_y[1]
+        y = border_y[0]
+
+    if (yPlayer in range(yRPlayer-10, yRPlayer+10)) and (xRintangan < -390):
+        crash_Player = True
+        print("MELEDAK BOSS")
+    else:
+        print("ga kena")
 
     glTranslated(xRintangan,y,0)
     glPointSize(50)
@@ -193,6 +214,13 @@ def Rintangan(y):
     glPopMatrix()
 
 def Mobil(cx,cy):
+    global selesai, xPlayer, yPlayer
+
+    if not selesai:
+        if xPlayer > 500:
+            xPlayer = 500
+        if xPlayer < -0:
+            xPlayer = -0
     glColor3ub(255, 255, 255)
     glBegin(GL_QUADS)
     glVertex2f(20+cx, 30+cy)
@@ -200,43 +228,6 @@ def Mobil(cx,cy):
     glVertex2f(80+cx, 60+cy)
     glVertex2f(80+cx, 30+cy)
     glEnd()
-
-def key_Mobil(key, x, y):
-    global xPlayer, yPlayer, crash_Player
-    if key == GLUT_KEY_UP:
-        if crash_Player == False:
-            if yPlayer+50 > grid_player[1]:
-                yPlayer += 10
-                crash_Player = True
-            else:
-                yPlayer += 10
-        else:
-            yPlayer += 0
-    elif key == GLUT_KEY_DOWN:
-        if crash_Player == False:
-            if yPlayer-5 < grid_player[0]:
-                yPlayer -= 10
-                crash_Player = True
-            else:
-                yPlayer -= 10
-        else:
-            yPlayer -= 0
-    elif key == GLUT_KEY_RIGHT:
-        if xPlayer+50 > 600:
-            xPlayer +=0
-        else:
-            xPlayer += 10
-    elif key == GLUT_KEY_LEFT:
-        if xPlayer-20 < 600:
-            xPlayer -=10
-        else:
-            xPlayer -= 10    
-
-def inputMouse(button, state, x,y):
-    global play
-
-    if button == GLUT_LEFT_BUTTON:
-        play = True
 
 def mainMenu():
     glBegin(GL_QUADS)
@@ -247,207 +238,272 @@ def mainMenu():
     glVertex2f(700, 0)
     glEnd()
 
-    def Rivals():
-        #R
-        glLineWidth(10)
-        glPointSize(5)
-        glBegin(GL_POLYGON)
-        glColor3ub(255, 255, 255) 
-        glVertex2f(120, 350)
-        glVertex2f(120, 440)
-        glVertex2f(170, 440)
-        glVertex2f(180, 420)
-        glVertex2f(160, 400)
-        glVertex2f(138, 400)
-        glVertex2f(169, 369)
-        glVertex2f(150, 357)
-        glVertex2f(130, 389)
-        glVertex2f(140, 350)
-        glEnd()
-
-        #I
-        glLineWidth(10)
-        glPointSize(5)
-        glBegin(GL_POLYGON)
-        glColor3ub(255, 255, 255) 
-        glVertex2f(190, 350)
-        glVertex2f(197, 382)
-        glVertex2f(190, 440)
-        glVertex2f(220, 440)
-        glVertex2f(215, 350)
-        glEnd()
-
-        #V
-        glLineWidth(10)
-        glPointSize(5)
-        glBegin(GL_POLYGON)
-        glColor3ub(255, 255, 255) 
-        glVertex2f(257, 350)
-        glVertex2f(232, 440)
-        glVertex2f(262, 433)
-        glVertex2f(266, 380)
-        glVertex2f(282, 375)
-        glVertex2f(282, 440)
-        glVertex2f(312, 440)
-        glVertex2f(293, 354)
-        glEnd()
-
-        #A
-        glLineWidth(10)
-        glPointSize(5)
-        glBegin(GL_POLYGON)
-        glColor3ub(255, 255, 255) 
-        glVertex2f(310, 350)
-        glVertex2f(328, 437)
-        glVertex2f(358, 436)
-        glVertex2f(383, 354)
-        glVertex2f(367, 351)
-        glVertex2f(362, 380)
-        glVertex2f(335, 380)
-        glVertex2f(338, 353)
-        glEnd()
-
-        #L
-        glLineWidth(10)
-        glPointSize(5)
-        glBegin(GL_POLYGON)
-        glColor3ub(255, 255, 255) 
-        glVertex2f(391, 350)
-        glVertex2f(385, 438)
-        glVertex2f(406, 437)
-        glVertex2f(401, 366)
-        glVertex2f(425, 370)
-        glVertex2f(426, 350)
-        glEnd()
-
-        #S
-        glLineWidth(10)
-        glPointSize(5)
-        glBegin(GL_POLYGON)
-        glColor3ub(255, 255, 255) 
-        glVertex2f(426, 350)
-        glVertex2f(472, 370)
-        glVertex2f(478, 387)
-        glVertex2f(440, 397)
-        glVertex2f(432, 411)
-        glVertex2f(438, 435)
-        glVertex2f(480, 435)
-        glVertex2f(483, 437)
-        glVertex2f(445, 426)
-        glVertex2f(452, 410)
-        glVertex2f(483, 405)
-        glVertex2f(493, 376)
-        glVertex2f(477, 353)
-        glVertex2f(440, 352)
-        glEnd()
-
-    def Cars():
-        #C
-        glBegin(GL_POLYGON)
-        glColor3ub(255, 255, 255) 
-        glVertex2f(212, 230)
-        glVertex2f(164, 239)
-        glVertex2f(138, 260)
-        glVertex2f(150, 300)
-        glVertex2f(196, 320)
-        glVertex2f(232, 310)
-        glVertex2f(167, 290)
-        glVertex2f(172, 255)
-        glVertex2f(231, 252)
-        glEnd()
-
-        #A
-        glBegin(GL_POLYGON)
-        glColor3ub(255, 255, 255) 
-        glVertex2f(242, 235)#
-        glVertex2f(258, 320)#
-        glVertex2f(287, 321)#
-        glVertex2f(305, 240)#
-        glVertex2f(284, 231)#
-        glVertex2f(281, 269)#
-        glVertex2f(265, 270)#
-        glVertex2f(260, 235)#
-        glEnd()
-
+    def jalan():
         glBegin(GL_QUADS)
-        glColor3ub(135, 206, 235)
-        glVertex2f(260, 235)
-        glVertex2f(365, 270)
-        glVertex2f(281, 269)
-        glVertex2f(284, 231)
+        glColor3ub(160, 160, 160) 
+        glVertex2f(0, 65)
+        glVertex2f(0, 0)
+        glVertex2f(700, 0)
+        glVertex2f(700, 65)
         glEnd()
 
-        #R
-        glBegin(GL_POLYGON)
-        glColor3ub(255, 255, 255) 
-        glVertex2f(315, 230)#
-        glVertex2f(315, 318)#
-        glVertex2f(351, 325)#
-        glVertex2f(365, 308)#
-        glVertex2f(356, 289)#
-        glVertex2f(336, 285)#
-        glVertex2f(380, 245)#
-        glVertex2f(356, 236)#
-        glVertex2f(333, 268)#
-        glVertex2f(336, 236)#
-        glEnd()
-        glBegin(GL_QUADS)
-        glColor3ub(135, 206, 235)
-        glVertex2f(336, 236)
-        glVertex2f(333, 268)
-        glVertex2f(356, 236)
-        glVertex2f(336, 232)
-        glEnd()
+    def TextMenu():
+        def Rivals():
+            x = 0
+            glTranslated(x, 0, 0)
+            x += 10
+            #R
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+80, 350)
+            glVertex2f(x+80, 440)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+80, 440)
+            glVertex2f(x+120, 440)
+            glVertex2f(x+120, 440)
+            glVertex2f(x+120, 400)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+80, 400)
+            glVertex2f(x+120, 350)
+            glVertex2f(x+120, 350)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+80, 400)
+            glVertex2f(x+120, 400)
+            glEnd()
 
-        #S
-        glBegin(GL_POLYGON)
-        glColor3ub(255, 255, 255) 
-        glVertex2f(387, 261)#
-        glVertex2f(426, 254)#
-        glVertex2f(428, 272)#
-        glVertex2f(384, 276)#
-        glVertex2f(378, 288)#
-        glVertex2f(385, 315)#
-        glVertex2f(445, 326)#
-        glVertex2f(450, 300)#
-        glVertex2f(404, 307)#
-        glVertex2f(400, 290)#
-        glVertex2f(452, 280)#
-        glVertex2f(450, 250)#
-        glVertex2f(394, 234)#
-        glEnd()
-        glBegin(GL_QUADS)
-        glColor3ub(135, 206, 235)
-        glVertex2f(453, 280)
-        glVertex2f(400, 290)
-        glVertex2f(404, 307)
-        glVertex2f(450, 300)
-        glEnd()
-        glBegin(GL_QUADS)
-        glColor3ub(135, 206, 235)
-        glVertex2f(387, 261)
-        glVertex2f(426, 254)
-        glVertex2f(427, 272)
-        glVertex2f(382, 276)
-        glEnd()
+            #I
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+160, 350)
+            glVertex2f(x+160, 440)
+            glEnd()
 
-    Rivals()
-    Cars()
+            #V
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+200, 440)
+            glVertex2f(x+230, 350)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+230, 350)
+            glVertex2f(x+260, 440)
+            glEnd()
+
+            #A
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+290, 350)
+            glVertex2f(x+320, 440)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+320, 440)
+            glVertex2f(x+350, 350)
+            glEnd()
+
+            #L
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+380, 350)
+            glVertex2f(x+380, 440)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+380, 350)
+            glVertex2f(x+430, 350)
+            glEnd()
+
+            #S
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+460, 350)
+            glVertex2f(x+510, 350)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+510, 350)
+            glVertex2f(x+510, 390)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+510, 390)
+            glVertex2f(x+460, 390)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+460, 390)
+            glVertex2f(x+460, 440)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+460, 440)
+            glVertex2f(x+510, 440)
+            glEnd()
+
+        def Cars():
+            x = 0
+            glTranslated(x, 0, 0)
+            x += 10
+            #C
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+128, 250)
+            glVertex2f(x+128, 320)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+128, 250)
+            glVertex2f(x+180, 250)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+128, 320)
+            glVertex2f(x+180, 320)
+            glEnd()
+
+            #A
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+220, 240)
+            glVertex2f(x+250, 320)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+250, 320)
+            glVertex2f(x+280, 240)
+            glEnd()
+
+            #R
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+320, 240)
+            glVertex2f(x+320, 320)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+320, 320)
+            glVertex2f(x+360, 320)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+360, 320)
+            glVertex2f(x+360, 290)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+360, 290)
+            glVertex2f(x+320, 290)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+320, 290)
+            glVertex2f(x+360, 240)
+            glEnd()
+
+            #S
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+390, 250)
+            glVertex2f(x+450, 250)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+450, 250)
+            glVertex2f(x+450, 280)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+450, 280)
+            glVertex2f(x+390, 280)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+390, 280)
+            glVertex2f(x+390, 320)
+            glEnd()
+            glLineWidth(10)
+            glBegin(GL_LINE_LOOP)
+            glColor3ub(255, 255, 255) 
+            glVertex2f(x+390, 320)
+            glVertex2f(x+450, 320)
+            glEnd()
+
+        Rivals()
+        Cars()
+
+    def start_game():
+        glPushMatrix()
+        glColor3b(36, 150, 127)
+        glBegin(GL_QUADS)
+        glVertex2f(200, 100)
+        glVertex2f(400, 100)
+        glVertex2f(400, 160)
+        glVertex2f(200, 160)
+        glEnd()
+        glColor3ub(0,0,0)
+        glLineWidth(3)
+        glBegin(GL_LINE_LOOP)
+        glVertex2f(200, 100)
+        glVertex2f(400, 100)
+        glVertex2f(400, 160)
+        glVertex2f(200, 160)
+        glEnd()
+        glPopMatrix()
+        drawTextBold("P L A Y G A M E",235,125)
+    
+    jalan()
+    TextMenu()
+    start_game()
 
 def playG():
     background()
     transKota()
     jalan()
-    # GarisTJalan(80)
-    # Tepi(150)
     Pembatas(160)
     Pembatas(10)
-    # Rintangan()
     Mobil(xPlayer, yPlayer)
     drawText('SCORE 1: ',15,460,0,0,0) #player 1
     drawTextNum(ScorePlayer,25,440,0,0,0) # player 1
     drawText('LEVEL : ',15,420,0,0,0)
     drawTextNum(Level,25,400,0,0,0)
+
     kx = 20
     for i in range(10):
         GMidJalan(kx, 80)
@@ -484,10 +540,11 @@ def showScreen():
 def timerRintangan(value):
     global xRintangan, yRPlayer, crash_Player, cekLev, tr
     if play == True:
-        xRintangan -= 20
-        # if crash_Player == False:
-        #     if xRintangan < -w:
-        #         xRintangan = w
+        xRintangan -= RKecepatan
+        if crash_Player == False:
+            if xRintangan < -600:
+                xRintangan = 100
+                yRPlayer = rd.randrange(65, 55, 10)
         # if crash_Player == False:
         #     if xRintangan < -550:
         #         cekLev += 1
@@ -505,24 +562,61 @@ def timerPlay(value):
     global x, kecepatan, cekPoint, cek_Kecepatan, Level, ScorePlayer, cekX
     if play == True:
         if crash_Player == False:
-            x -= kecepatan
-            if x < -value:
+            x -= 3.5
+            if x < value:
                 x = cekX
-            # ScorePlayer += kecepatan
 
-            # if ScorePlayer % cek_Kecepatan == 0:
-            #     Level += 1
-            #     cekX -= 5
-            #     cekPoint -= 5
-            #     cek_Kecepatan += 10000
+            ScorePlayer += kecepatan
+            if ScorePlayer % cek_Kecepatan == 0:
+                Level += 1
+                cekX -= 5
+                cekPoint -= 5
+                cek_Kecepatan += 10000
             
-            # if cekX < 20:
-            #     cekX = 20
+            if cekX < 10:
+                cekX = 10
 
-            # if cekPoint < 10:
-            #     cekPoint = 10
+            if cekPoint < 10:
+                cekPoint = 10
             
     glutTimerFunc(cekPoint,timerPlay,0)
+
+def key_Mobil(key, x, y):
+    global xPlayer, yPlayer, crash_Player
+    if key == GLUT_KEY_UP:
+        if crash_Player == False:
+            if yPlayer+50 > grid_y_player[1]:
+                yPlayer += 10
+                crash_Player = True
+            else:
+                yPlayer += 10
+        else:
+            yPlayer += 0
+    elif key == GLUT_KEY_DOWN:
+        if crash_Player == False:
+            if yPlayer-5 < grid_y_player[0]:
+                yPlayer -= 10
+                crash_Player = True
+            else:
+                yPlayer -= 10
+        else:
+            yPlayer -= 0
+    elif key == GLUT_KEY_RIGHT:
+        if xPlayer+50 > 600:
+            xPlayer +=0
+        else:
+            xPlayer += 10
+    elif key == GLUT_KEY_LEFT:
+        if xPlayer-20 < 600:
+            xPlayer -=10
+        else:
+            xPlayer -= 10    
+
+def inputMouse(button, state, x,y):
+    global play
+
+    if button == GLUT_LEFT_BUTTON:
+        play = True
 
 def init():
     glClearColor(0.1, 0,2, 0.2)
@@ -540,8 +634,8 @@ def Main():
     glutMouseFunc(inputMouse)
     # glutPassiveMotionFunc(mouseFunc)
     # glutTimerFunc(tr, timerRintangan, 0)
-    # timerPlay(0)
     # timerRintangan(0)
+    timerPlay(0)
     init()
     glutMainLoop()
 
