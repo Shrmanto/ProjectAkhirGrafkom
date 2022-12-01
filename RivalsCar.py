@@ -15,20 +15,24 @@ xPlayer = 0
 yPlayer = 10
 
 selesai = False
+crash_Player = False
 
 border_y = [0, 150, 0, 100]
 
 grid_x_player = [550,0, 600,0]
 grid_y_player = [0,140, 0,150]
-crash_Player = False
 
-x = 10
+xy = 0
+Cek_xy = 0
+x = 0
+
 yRPlayer = rd.randrange(55, 65, 10)
 kecepatan = 3
-RKecepatan = 0.7
+Kkecepatan = 1
+RKecepatan = 1
 cekPoint = 30
 cekX = 10
-cek_Kecepatan = 5000
+cek_Kecepatan = 1000
 
 ScorePlayer = 0
 Level = 1
@@ -97,7 +101,12 @@ def background():
     glPopMatrix()
 
 def kota(zx, vy):
+    global xy, Kkecepatan, Cek_xy
     glPushMatrix()
+    xy -= 0.3
+    if xy < -400:
+        xy = Cek_xy
+    glTranslated(xy, 0, 0)
     glBegin(GL_QUADS) 
     glColor3ub(160,160,160) #hitam
     glVertex2f(zx + 0, 150)
@@ -108,7 +117,6 @@ def kota(zx, vy):
     glPopMatrix()
 
 def transKota():
-    
     def kota1():
         kota(0,0)
     def kota2():
@@ -121,6 +129,10 @@ def transKota():
         kota(440, 25)
     def kota6():
         kota(570, -10)
+    def kota7():
+        kota(640, 10)
+    def kota8():
+        kota(770, 20)
     
     kota1()
     kota2()
@@ -128,6 +140,8 @@ def transKota():
     kota4()
     kota5()
     kota6()
+    kota7()
+    kota8()
 
 def jalan():
     glPushMatrix()
@@ -169,16 +183,37 @@ def Pembatas(pbt):
 
 def GMidJalan(kx, ky):
     global x, kecepatan, cekX
+    # x -= 0.05
+    # if x < -400:
+    #     x = w
     glTranslated(x, 0, 0)
-    # x -= kecepatan
-    # if x < -w:
-    #     x = cekX
     glColor3ub(255, 255, 255)
     glLineWidth(15)
     glBegin(GL_LINES)
     glVertex2f(kx, ky)
     glVertex2f(kx + 70, ky)
     glEnd()
+
+def transMidJalan():
+    def MidJalan1():
+        GMidJalan(10, 80)
+    def MidJalan2():
+        GMidJalan(100, 80)
+    def MidJalan3():
+        GMidJalan(190, 80)
+    def MidJalan4():
+        GMidJalan(280, 80)
+    def MidJalan5():
+        GMidJalan(370, 80)
+    def MidJalan6():
+        GMidJalan(460, 80)
+
+    MidJalan1()
+    MidJalan2()
+    MidJalan3()
+    MidJalan4()
+    MidJalan5()
+    MidJalan6()
 
 def Rintangan(y):
     glPushMatrix()
@@ -187,19 +222,19 @@ def Rintangan(y):
     if not selesai:
         if y > 150:
             y = 150
-        if y < 20:
-            y = 20
+        if y < 25:
+            y = 25
 
     xRintangan -= RKecepatan
     if xRintangan < -400 and y < border_y[1] or y < border_y[0]:
-        yRPlayer = rd.randrange(y -10, y +5, 10)
+        yRPlayer = rd.randrange(y -20, y +10, 10)
         # yRPlayer = rd.randrange(65, 55, 10)
         y = yRPlayer
         xRintangan = w
         y = border_y[1]
         y = border_y[0]
 
-    if (yPlayer in range(yRPlayer-10, yRPlayer+10)) and (xRintangan < -390):
+    if (yPlayer in range(yRPlayer-25, yRPlayer+25)) and (xRintangan < -390):
         crash_Player = True
         print("MELEDAK BOSS")
     else:
@@ -492,27 +527,39 @@ def mainMenu():
     TextMenu()
     start_game()
 
+def Score_Player():
+    drawText('SCORE : ',15,460,0,0,0) #player 1
+    drawTextNum(ScorePlayer,25,440,0,0,0) # player 1
+    # drawText('LEVEL : ',15,420,0,0,0)
+    # drawTextNum(Level,25,400,0,0,0)
+
 def playG():
     background()
     transKota()
     jalan()
     Pembatas(160)
     Pembatas(10)
-    Mobil(xPlayer, yPlayer)
-    drawText('SCORE 1: ',15,460,0,0,0) #player 1
-    drawTextNum(ScorePlayer,25,440,0,0,0) # player 1
-    drawText('LEVEL : ',15,420,0,0,0)
-    drawTextNum(Level,25,400,0,0,0)
 
     kx = 20
     for i in range(10):
         GMidJalan(kx, 80)
         kx += 100
 
+    Mobil(xPlayer, yPlayer)
+
+    Score_Player()
+
 def play_Game():
+    global ScorePlayer, cek_Kecepatan, Level, cekX, cekPoint
     if crash_Player == False:
         playG()
         Rintangan(yRPlayer)
+        ScorePlayer += kecepatan
+        if ScorePlayer % cek_Kecepatan == 0:
+            Level += 1
+            cekX -= 5
+            cekPoint -= 5
+            cek_Kecepatan += 5000
     
     if crash_Player == True:
         bg_text(-50,-50)
@@ -557,6 +604,16 @@ def timerRintangan(value):
             # if (yPlayer in range(yRPlayer-50,yRPlayer+20))and(xRintangan < -390):
             #     crash_Player = True
     glutTimerFunc(tr, timerRintangan,0)
+
+def timerKota(value):
+    global xy, Kkecepatan, Cek_xy, tr
+    if play == True:
+        if crash_Player == False:
+            xy -= Kkecepatan
+            if xy < value:
+                xy = Cek_xy
+
+    glutTimerFunc(tr,timerKota,0)
 
 def timerPlay(value):
     global x, kecepatan, cekPoint, cek_Kecepatan, Level, ScorePlayer, cekX
@@ -635,7 +692,8 @@ def Main():
     # glutPassiveMotionFunc(mouseFunc)
     # glutTimerFunc(tr, timerRintangan, 0)
     # timerRintangan(0)
-    timerPlay(0)
+    # timerPlay(0)
+    # timerKota(0)
     init()
     glutMainLoop()
 
