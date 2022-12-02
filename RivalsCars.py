@@ -2,7 +2,7 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
-import random as rd, os, OpenGL.GLUT as glut
+import random as rd, os, OpenGL.GLUT as glut, math
 os.system('cls')
 w, h = 600, 500
 
@@ -11,6 +11,7 @@ selesai = False
 crash_Player = False
 
 xy = 0
+xc = 0
 Cek_xy = 20
 
 xPlayer = 0
@@ -19,7 +20,7 @@ yPlayer = 10
 xRintangan = 50
 
 border_y = [0, 150, 0, 100]
-grid_y_player = [0,125, 0,150]
+grid_y_player = [0,140, 0,150]
 yRPlayer = rd.randrange(55, 65, 10)
 
 jumlah_bintang = 1000
@@ -602,7 +603,7 @@ def Rintangan(y):
         y = yRPlayer
         xRintangan = 100
 
-    if (yPlayer in range(yRPlayer-10, yRPlayer+30)) and (xRintangan < -390):
+    if (yPlayer in range(yRPlayer-20, yRPlayer+40)) and (xRintangan < -390):
         crash_Player = True
         print("MELEDAK BOSS")
     else:
@@ -763,6 +764,19 @@ def transKota():
     kota9()
     kota10()
 
+def salju():
+    glPointSize(15)
+    glColor3f(1.0, 1.0, 1.0) #RGB
+    glBegin(GL_POINTS)
+    y = 1000
+    for i in range(jumlah_bintang):
+        x = rd.randrange(-1000,1000)
+        glVertex2f(x,y)
+        if y != 1000:
+            x = x
+        y -= 50
+    glEnd()
+
 def key_Mobil(key, x, y):
     global xPlayer, yPlayer, crash_Player
     if key == GLUT_KEY_UP:
@@ -803,6 +817,7 @@ def inputMouse(button, state, x,y):
 def playG():
     background()
     transKota()
+    salju()
     jalan()
 
     Mobil(xPlayer, yPlayer)
