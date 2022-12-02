@@ -23,6 +23,7 @@ grid_y_player = [0,125, 0,150]
 yRPlayer = rd.randrange(55, 65, 10)
 
 jumlah_bintang = 1000
+jedag, jedug = 1, 1
 
 def drawText(ch,xpos,ypos,r,b,g):
     color = (r, b, g)
@@ -338,45 +339,52 @@ def mainMenu():
     start_game()
 
 def GameOver():
-    glPointSize(8)
-    glColor3f(1.0, 1.0, 1.0) #RGB
-    glBegin(GL_POINTS)
-    y = 1000
-    for i in range(jumlah_bintang):
-        x = rd.randrange(-1000,1000)
-        glVertex2f(x,y)
-        if y != 1000:
-            x = x
-        y -= 100
-    glEnd()
+    def kelapKelip():
+        glPointSize(8)
+        glColor3f(1.0, 1.0, 1.0) #RGB
+        glBegin(GL_POINTS)
+        y = 1000
+        for i in range(jumlah_bintang):
+            x = rd.randrange(-1000,1000)
+            glVertex2f(x,y)
+            if y != 1000:
+                x = x
+            y -= 100
+        glEnd()
 
     def Game():
+        global jedag, jedug
         #G
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(200,450)
         glVertex2f(100,450)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(100,450)
         glVertex2f(100,350)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(100,350)
         glVertex2f(200,350)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(200,350)
         glVertex2f(200,400)
         glEnd()
-        glColor3ub(255, 255, 255)
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glLineWidth(10)     
         glBegin(GL_LINE_LOOP)
         glVertex2f(200,400)
@@ -384,66 +392,76 @@ def GameOver():
         glEnd()
 
         #A
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(200,350)
         glVertex2f(250,450)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(250,450)
         glVertex2f(300,350)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(225,400)
         glVertex2f(275,400)
         glEnd()
 
         #M
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(300,350)
         glVertex2f(300,450)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(300,450)
         glVertex2f(350,400)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(350,400)
         glVertex2f(400,450)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(400,450)
         glVertex2f(400,350)
         glEnd()
 
         #E
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(400,450)
         glVertex2f(500,450)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(400,400)
         glVertex2f(500,400)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(400,350)
         glVertex2f(500,350)
@@ -451,8 +469,9 @@ def GameOver():
 
     def Over():
         #O
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(100,330)
         glVertex2f(200,330)
@@ -462,83 +481,93 @@ def GameOver():
         glEnd()
 
         #V
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(200,330)
         glVertex2f(250,230)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(250,230)
         glVertex2f(300,330)
         glEnd()
 
         #E
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(300,330)
         glVertex2f(300,230)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(300,330)
         glVertex2f(400,330)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(300,280)
         glVertex2f(400,280)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(300,230)
         glVertex2f(400,230)
         glEnd()
 
         #R
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(400,330)
         glVertex2f(400,230)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(400,330)
         glVertex2f(500,330)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(500,330)
         glVertex2f(500,280)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(500,280)
         glVertex2f(400,280)
         glEnd()
-        glColor3ub(255, 255, 255)
         glLineWidth(10)     
+        glTranslated(0,rd.randrange(-jedag,jedug),0)
+        glColor3f(rd.uniform(0.5,1),rd.uniform(0.5,1),rd.uniform(0.5,1))
         glBegin(GL_LINE_LOOP)
         glVertex2f(400,280)
         glVertex2f(500,230)
         glEnd()
 
     def Ulang():
-        drawTextBold("M E N G U L A N G  G A M E ! !",170,150)
-        drawTextBold("1. ENTER UNTUK MENGULANG",170,125)
-        drawTextBold("2. ESC UNTUK EXIT GAME",170,100)
+        drawTextBold("E N T E R  U N T U K  M E N G U L A N G",130,125)
+        drawTextBold("Crate by Kelompok GrafKom",180,10)
     
-    Game(), Over(), Ulang()
+    kelapKelip(), Ulang(), Game(), Over()
 
 def Mobil(cx,cy):
     global selesai, xPlayer, yPlayer
@@ -566,18 +595,18 @@ def Rintangan(y):
         if y < 25:
             y = 25
 
-    xRintangan -= 0.1
+    xRintangan -= 0.5
     if xRintangan < -400 and y < border_y[1] or y < border_y[0]:
         yRPlayer = rd.randrange(y -15, y +10, 10)
         # y = rd.randrange(yPlayer -15, yPlayer +10, 10)
         y = yRPlayer
         xRintangan = 100
 
-    # if (yPlayer in range(yRPlayer-10, yRPlayer+30)) and (xRintangan < -390):
-    #     crash_Player = True
-    #     print("MELEDAK BOSS")
-    # else:
-    #     print("ga kena")
+    if (yPlayer in range(yRPlayer-10, yRPlayer+30)) and (xRintangan < -390):
+        crash_Player = True
+        print("MELEDAK BOSS")
+    else:
+        print("ga kena")
 
     glTranslated(xRintangan,y,0)
     glPointSize(50)
@@ -688,7 +717,7 @@ def jalan():
 def kota(zx, vy):
     global xy, Cek_xy
     glPushMatrix()
-    xy -= 0.1
+    xy -= 0.2
     if xy < -400:
         xy = Cek_xy
     glTranslated(xy, 0, 0)
@@ -765,6 +794,27 @@ def key_Mobil(key, x, y):
         else:
             xPlayer -= 10    
 
+def inputMouse(button, state, x,y):
+    global play
+
+    if button == GLUT_LEFT_BUTTON:
+        play = True
+
+def playG():
+    background()
+    transKota()
+    jalan()
+
+    Mobil(xPlayer, yPlayer)
+
+def play_Game():
+    if crash_Player == False:
+        playG()
+        Rintangan(yRPlayer)
+
+    if crash_Player == True:
+        GameOver()
+
 def iterate():
     glViewport(0, 0, 600, 500) #utk mengatur area pandang
     glMatrixMode(GL_PROJECTION)
@@ -777,18 +827,10 @@ def showScreen():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) 
     glLoadIdentity()
     iterate()
-    background()
-    GameOver()
-    # transKota()
-    # jalan()
-
-    # Mobil(xPlayer, yPlayer)
-
-    # Rintangan(yRPlayer)
-    # if play == False:
-    #     mainMenu()
-    # else:
-    #     play_Game()
+    if play == False:
+        mainMenu()
+    else:
+        play_Game()
     glFlush()
     glutSwapBuffers()
 
@@ -805,8 +847,8 @@ def Main():
     glutDisplayFunc(showScreen)
     glutSpecialFunc(key_Mobil)
     glutIdleFunc(showScreen)
-    # glutMouseFunc(inputMouse)
-    # init()
+    glutMouseFunc(inputMouse)
+    init()
     glutMainLoop()
 
 Main()
