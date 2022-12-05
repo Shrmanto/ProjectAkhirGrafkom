@@ -15,16 +15,19 @@ xc = 0
 Cek_xy = 20
 
 xPlayer = 0
-yPlayer = 10
+yPlayer = 0
 
 xRintangan = 50
 
 border_y = [0, 150, 0, 100]
-grid_y_player = [0,140, 0,150]
+grid_y_player = [0,135, 0,150]
 yRPlayer = rd.randrange(55, 65, 10)
 
 jumlah_bintang = 1000
 jedag, jedug = 1, 1
+
+ScorePlayer = 0
+kecepatan = 1
 
 def drawText(ch,xpos,ypos,r,b,g):
     color = (r, b, g)
@@ -588,7 +591,7 @@ def Mobil(cx,cy):
 
 def Rintangan(y):
     glPushMatrix()
-    global xRintangan, yRPlayer, xPlayer, yPlayer, crash_Player, border_y
+    global xRintangan, yRPlayer, xPlayer, yPlayer, crash_Player
 
     if not selesai:
         if y > 150:
@@ -597,23 +600,19 @@ def Rintangan(y):
             y = 25
 
     xRintangan -= 0.5
-    if xRintangan < -400 and y < border_y[1] or y < border_y[0]:
-        yRPlayer = rd.randrange(y -15, y +10, 10)
-        # y = rd.randrange(yPlayer -15, yPlayer +10, 10)
+    if xRintangan < -400:
+        yRPlayer = rd.randrange(y -25, y +10, 10)
         y = yRPlayer
         xRintangan = 100
 
-    if (yPlayer in range(yRPlayer-20, yRPlayer+40)) and (xRintangan < -390):
+    if yPlayer in range(yRPlayer-20, yRPlayer+10) and (xRintangan < -390):
         crash_Player = True
-        print("MELEDAK BOSS")
-    else:
-        print("ga kena")
 
     glTranslated(xRintangan,y,0)
     glPointSize(50)
     glBegin(GL_POINTS)
     glColor3ub(37, 188, 143) 
-    glVertex2f(550+xRintangan, y)
+    glVertex2f(500+xRintangan, y)
     glEnd()
     glPopMatrix()
 
@@ -718,7 +717,7 @@ def jalan():
 def kota(zx, vy):
     global xy, Cek_xy
     glPushMatrix()
-    xy -= 0.2
+    xy -= 0.3
     if xy < -400:
         xy = Cek_xy
     glTranslated(xy, 0, 0)
@@ -777,8 +776,12 @@ def salju():
         y -= 50
     glEnd()
 
+def Score_Player():
+    drawText('SCORE : ',15,480,0,0,0)
+    drawTextNum(ScorePlayer,15,460,0,0,0) 
+
 def key_Mobil(key, x, y):
-    global xPlayer, yPlayer, crash_Player
+    global xPlayer, yPlayer, crash_Player, play
     if key == GLUT_KEY_UP:
         if crash_Player == False:
             if yPlayer+50 > grid_y_player[1]:
@@ -801,12 +804,16 @@ def key_Mobil(key, x, y):
         if xPlayer+50 > 600:
             xPlayer +=0
         else:
-            xPlayer += 10
+            xPlayer += 0
     elif key == GLUT_KEY_LEFT:
-        if xPlayer-20 < 600:
-            xPlayer -=10
+        if xPlayer-20 < 0:
+            xPlayer -=0
         else:
-            xPlayer -= 10    
+            xPlayer -= 0
+
+    elif ord(key) == ord(b'\r'):
+        play = False
+        crash_Player = False  
 
 def inputMouse(button, state, x,y):
     global play
@@ -822,10 +829,14 @@ def playG():
 
     Mobil(xPlayer, yPlayer)
 
+    Score_Player()
+
 def play_Game():
+    global ScorePlayer, kecepatan, cek_Kecepatan
     if crash_Player == False:
         playG()
         Rintangan(yRPlayer)
+        ScorePlayer += kecepatan
 
     if crash_Player == True:
         GameOver()
@@ -861,6 +872,7 @@ def Main():
     wind = glutCreateWindow("Racing Rivals")
     glutDisplayFunc(showScreen)
     glutSpecialFunc(key_Mobil)
+    glutKeyboardFunc(key_Mobil)
     glutIdleFunc(showScreen)
     glutMouseFunc(inputMouse)
     init()
