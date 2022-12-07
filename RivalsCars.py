@@ -15,7 +15,7 @@ xc = 0
 Cek_xy = 20
 
 xPlayer = 0
-yPlayer = 60
+yPlayer = 35
 
 xMusuh = 0
 yMusuh = 0
