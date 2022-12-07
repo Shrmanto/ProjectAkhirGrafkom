@@ -814,11 +814,11 @@ def Player(cx, cy):
 def Musuh(dx, dy):
     global xMusuh, yMusuh, yRPlayer, selesai, crash_Player, yPlayer, xPlayer
 
-    # if not selesai:
-    #     if dy > 200:
-    #         dy = 200
-    #     if dy < 110:
-    #         dy = 110
+    if not selesai:
+        if dy > 200:
+            dy = 200
+        if dy < 110:
+            dy = 110
     
     xMusuh -= 2
     if xMusuh < -600:
