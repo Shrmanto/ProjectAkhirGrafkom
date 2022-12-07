@@ -23,7 +23,7 @@ yMusuh = 0
 xRintangan = 50
 
 grid_y_player = [0,125, 0,120]
-yRPlayer = rd.randrange(150, 300)
+yRPlayer = rd.randrange(50, 200)
 
 jumlah_bintang = 1000
 jedag, jedug = 1, 1
@@ -821,7 +821,7 @@ def Musuh(dx, dy):
     xMusuh -= 2
     if xMusuh < -600:
         yRPlayer = rd.randrange(yMusuh -100, yMusuh +50)
-        xMusuh = 100
+        xMusuh = 500
     glColor3ub(37, 188, 143) 
     glBegin(GL_QUADS)
     glVertex2f(570+dx, 30+dy)#f3
@@ -999,28 +999,20 @@ def Rintangan(y):
         if y < 110:
             y = 110
 
-    # if x_body-300 >= x_poin:
-    # if y_body+40 >= y_poin >= y_body-40:
-    #     x_body = 0
-    #     y_poin = random.randint(-680,100)
-    #     point += 1
+    xRintangan -= 2
+    if xRintangan < -600:
+        y = 100
+        # yRPlayer = rd.randrange(y -200, y +50)
+        xRintangan = 500
 
-    xRintangan -= 5
-    if xRintangan < -2000:
-        yRPlayer = rd.randrange(y -400, y +200)
-        xRintangan = 2000
-    # if xPlayer >= xRintangan - 300:
-    #     if yPlayer+100 >= y >= yPlayer-100:
-    #         crash_Player = True
-
-    if yPlayer in range(yRPlayer-100, yRPlayer+100) and xRintangan < -390:
-        crash_Player = True
+    # if yPlayer in range(yRPlayer-100, yRPlayer+100) and xRintangan < -390:
+    #     crash_Player = True
 
     glTranslated(xRintangan,y,0)
     glPointSize(40)
     glBegin(GL_POINTS)
     glColor3ub(37, 188, 143) 
-    glVertex2f(2000+xRintangan, y)
+    glVertex2f(550+xRintangan, y)
     glEnd()
     glPopMatrix()
 
@@ -1245,7 +1237,7 @@ def play_Game():
     global ScorePlayer, kecepatan, cek_Kecepatan
     if crash_Player == False:
         playG()
-
+        # Musuh(xMusuh, yRPlayer)
         # Rintangan(yRPlayer)
         ScorePlayer += kecepatan
 
