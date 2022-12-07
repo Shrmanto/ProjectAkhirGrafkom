@@ -23,7 +23,7 @@ yMusuh = 0
 xRintangan = 50
 
 grid_y_player = [0,125, 0,120]
-yRPlayer = rd.randrange(50, 200)
+# yRPlayer = rd.randrange(50, 200)
 
 jumlah_bintang = 1000
 jedag, jedug = 1, 1
