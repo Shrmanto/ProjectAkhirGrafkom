@@ -826,8 +826,8 @@ def Musuh(dx, dy):
         yMusuh = yRPlayer
         xMusuh = 500
 
-    # if yPlayer in range(yRPlayer-50, yRPlayer+50) and xMusuh < -390:
-    #     crash_Player = True
+    if yPlayer in range(yRPlayer-50, yRPlayer+50) and xMusuh < -390:
+        crash_Player = True
 
     glColor3ub(37, 188, 143) 
     glBegin(GL_QUADS)
