@@ -340,9 +340,7 @@ def mainMenu():
         glPopMatrix()
         drawTextBold("P L A Y G A M E",235,125)
     
-    jalan()
-    TextMenu()
-    start_game()
+    jalan(), TextMenu(), start_game()
 
 def GameOver():
     def kelapKelip():
@@ -834,148 +832,6 @@ def Musuh(dx, dy):
     glVertex2f(570+dx, 80+dy)#i1
     glEnd()
 
-def Mobil(dx, dy):
-    # glTranslated(posisiX,posisiY,0)
-    glScaled(0.2,0.2,0)
-    def circle1(cx,cy,r,num_segment):
-        glBegin(GL_POLYGON)
-        glColor3ub(96,96,96)
-        for i in range(num_segment):
-            theta= 2 *3.1415926*i/num_segment
-            x = r * math.cos(theta)
-            y = r * math.sin(theta)
-            glVertex2f(x + cx, y + cy)
-        glEnd()
-
-    def circle2(cx,cy,r,num_segment):
-        glBegin(GL_POLYGON)
-        glColor3ub(96,96,96)
-        for i in range(num_segment):
-            theta= 2 *3.1415926*i/num_segment
-            x = r * math.cos(theta)
-            y = r * math.sin(theta)
-            glVertex2f(x + cx, y + cy)
-        glEnd()
-
-    def circle3(cx,cy,r,num_segment):
-        glBegin(GL_POLYGON)
-        glColor3ub(255,255,255)
-        for i in range(num_segment):
-            theta= 2 *3.1415926*i/num_segment
-            x = r * math.cos(theta)
-            y = r * math.sin(theta)
-            glVertex2f(x + cx, y + cy)
-        glEnd()
-
-    def circle4(cx,cy,r,num_segment):
-        glBegin(GL_POLYGON)
-        glColor3ub(255,255,255)
-        for i in range(num_segment):
-            theta= 2 *3.1415926*i/num_segment
-            x = r * math.cos(theta)
-            y = r * math.sin(theta)
-            glVertex2f(x + cx, y + cy)
-        glEnd()
-
-#body
-    glColor3ub(255, 255, 255)
-    glBegin(GL_POLYGON)
-    #body depan
-    glVertex2f(216+dx,-49+dy)#(P)
-    glVertex2f(277+dx,-43+dy)#(Q)
-    glVertex2f(299+dx,-28+dy)#(R)
-    glVertex2f(292+dx,-21+dy)#(S)
-    glVertex2f(298+dx,-11+dy)#(T)
-    glVertex2f(300+dx,10+dy)#(U)
-    glVertex2f(288+dx,18+dy)#(v)
-    glVertex2f(280+dx,36+dy)#(w)
-    #body tengah
-    glVertex2f(208+dx,57+dy)#(L)
-    glVertex2f(126+dx,67+dy)#(z)
-    glVertex2f(19+dx,115+dy)#(m)
-    glVertex2f(-33+dx,119+dy)#(v1)
-    glVertex2f(-88+dx,117+dy)#(k)
-    glVertex2f(-154+dx,107+dy)#(j)
-    glVertex2f(-273+dx,68+dy)#(i)
-    #body belakang
-    glVertex2f(-312+dx,65+dy)#(h)
-    glVertex2f(-320+dx,20+dy)#(g)
-    glVertex2f(-329+dx,20+dy)#(f)
-    glVertex2f(-329+dx,-9+dy)#(c)
-    glVertex2f(-298+dx,-37+dy)#(d)
-    glVertex2f(-257+dx,-46+dy)#(e)
-    glVertex2f(-174+dx,-46+dy)#(n)
-    glEnd()
-#lampu depan
-    glColor3ub(204, 204, 0)
-    glBegin(GL_POLYGON)
-    glVertex2f(288+dx,18+dy)#(v)
-    glVertex2f(244+dx,19+dy)#(o1)
-    glVertex2f(224+dx,40+dy)#(p1)
-    glVertex2f(280+dx,36+dy)#(w)
-    glEnd()
-#lampu belakang
-    glColor3ub(204, 204, 0)
-    glBegin(GL_POLYGON)
-    glVertex2f(-312+dx,65+dy)#(H)
-    glVertex2f(-281+dx,47+dy)#(Q1)
-    glVertex2f(-320+dx,20+dy)#(G)
-    glEnd()
-#kaca depan
-    glColor3ub(204, 204, 0)
-    glBegin(GL_POLYGON)
-    glVertex2f(107+dx,61+dy)
-    glVertex2f(18+dx,106+dy)#(H)
-    glVertex2f(25+dx,112+dy)#(Q1)
-    glVertex2f(126+dx,67+dy)
-    glEnd()
-#kaca1
-    glColor3ub(204, 204, 0)
-    glBegin(GL_POLYGON)
-    glVertex2f(-36+dx,59+dy)#(L)
-    glVertex2f(-43+dx,105+dy)#()
-    glVertex2f(3+dx,100+dy)#()
-    glVertex2f(44+dx,84+dy)#()
-    glVertex2f(90+dx,54+dy)#(j1)
-    glEnd()
-#pintu1
-    glColor3ub(204, 204, 0)
-    glBegin(GL_POLYGON)
-    glVertex2f(-35+dx,-29+dy)#()
-    glVertex2f(105+dx,-30+dy)#(g1)
-    glVertex2f(107+dx,36+dy)#(s1)
-    glVertex2f(90+dx,54+dy)#(j1)
-    glVertex2f(-36+dx,59+dy)
-    glEnd()
-#kaca2
-    glColor3ub(204, 204, 0)
-    glBegin(GL_POLYGON)
-    glVertex2f(-199+dx,65+dy)#(h1)
-    glVertex2f(-173+dx,85+dy)#(t1)
-    glVertex2f(-140+dx,100+dy)#(e1)
-    glVertex2f(-107+dx,105+dy)#(f1)
-    glVertex2f(-65+dx,107+dy)#()
-    glVertex2f(-60+dx,62+dy)#(m)
-    glEnd()
-#pintu2
-    glColor3ub(204, 204, 0)
-    glBegin(GL_POLYGON)
-    glVertex2f(-133+dx,-31+dy)#()
-    glVertex2f(-141+dx,-14+dy)#(g1)
-    glVertex2f(-149+dx,1+dy)#(s1)
-    glVertex2f(-160+dx,20+dy)
-    glVertex2f(-174+dx,32+dy)#(j1)
-    glVertex2f(-198+dx,45+dy)
-    glVertex2f(-199+dx,65+dy)
-    glVertex2f(-60+dx,62+dy)
-    glVertex2f(-57+dx,-30+dy)
-    glEnd()
- 
-    circle1(-200+dx,-30+dy,50,360)
-    circle2(150+dx,-30+dy,50,360)
-    circle3(-200+dx,-30+dy,30,360)
-    circle4(150+dx,-30+dy,30,360)
-
 # def Mobil(cx,cy):
 #     global selesai, xPlayer, yPlayer
 
@@ -1111,11 +967,7 @@ def jalan():
         glVertex2f(700, pbt)
         glEnd()
 
-    Tepi(150)
-    Pembatas(160)
-    Pembatas(10)
-    GarisTJalan(80)
-    transMidJalan()
+    Tepi(150), Pembatas(160), Pembatas(10), GarisTJalan(80), transMidJalan()
 
 def kota(zx, vy):
     global xy, Cek_xy
@@ -1155,16 +1007,7 @@ def transKota():
     def kota10():
         kota(940, -10)
     
-    kota1()
-    kota2()
-    kota3()
-    kota4()
-    kota5()
-    kota6()
-    kota7()
-    kota8()
-    kota9()
-    kota10()
+    kota1(), kota2(),kota3(),kota4(),kota5(),kota6(),kota7(),kota8(),kota9(),kota10()
 
 def salju():
     glPointSize(15)
