@@ -578,7 +578,7 @@ def GameOver():
 def Player(cx, cy):
     global xPlayer, yPlayer, xMusuh, yMusuh, crash_Player
 
-    if xPlayer==xMusuh and yPlayer-40<=yMusuh<=yPlayer+40:
+    if xPlayer==xMusuh and yPlayer-50<=yMusuh<=yPlayer+50:
         crash_Player = True
 
     def circle1(cx,cy,r,num_segment):
@@ -813,15 +813,18 @@ def Player(cx, cy):
 
 def Musuh(dx, dy):
     global xMusuh, yMusuh, yRPlayer, selesai
+
     if not selesai:
         if yMusuh > 300:
             yMusuh = 300
         if yMusuh < 110:
             yMusuh = 110
+    
     xMusuh -= 2
     if xMusuh < -600:
         yRPlayer = rd.randrange(yMusuh -100, yMusuh +50)
         xMusuh = 500
+
     glColor3ub(37, 188, 143) 
     glBegin(GL_QUADS)
     glVertex2f(570+dx, 30+dy)#f3
@@ -1117,7 +1120,7 @@ def jalan():
 def kota(zx, vy):
     global xy, Cek_xy
     glPushMatrix()
-    # xy -= 0.5
+    xy -= 0.5
     if xy < -400:
         xy = Cek_xy
     glTranslated(xy, 0, 0)
