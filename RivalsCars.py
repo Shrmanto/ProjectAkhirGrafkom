@@ -579,7 +579,7 @@ def Player(cx, cy):
     # if xPlayer==xMusuh and yPlayer-50<=yMusuh<=yPlayer+50:
     #     crash_Player = True
     # if yPlayer in range(yRPlayer-50, yRPlayer+50) and xMusuh < -390:
-    #     crash_Player = True
+        # crash_Player = True
 
     def circle1(cx,cy,r,num_segment):
         glBegin(GL_POLYGON)
