@@ -578,8 +578,8 @@ def GameOver():
 def Player(cx, cy):
     global xPlayer, yPlayer, xMusuh, yMusuh, crash_Player
 
-    if xPlayer==xMusuh and yPlayer-50<=yMusuh<=yPlayer+50:
-        crash_Player = True
+    # if xPlayer==xMusuh and yPlayer-50<=yMusuh<=yPlayer+50:
+    #     crash_Player = True
 
     def circle1(cx,cy,r,num_segment):
         glBegin(GL_POLYGON)
@@ -814,25 +814,25 @@ def Player(cx, cy):
 def Musuh(dx, dy):
     global xMusuh, yMusuh, yRPlayer, selesai
 
-    if not selesai:
-        if yMusuh > 300:
-            yMusuh = 300
-        if yMusuh < 110:
-            yMusuh = 110
+    # if not selesai:
+    #     if yMusuh > 300:
+    #         yMusuh = 300
+    #     if yMusuh < 110:
+    #         yMusuh = 110
     
     xMusuh -= 2
     if xMusuh < -600:
-        yRPlayer = rd.randrange(yMusuh -100, yMusuh +50)
+        yRPlayer = rd.randrange(yMusuh -150, yMusuh +75)
+        yMusuh = yRPlayer
         xMusuh = 500
 
     glColor3ub(37, 188, 143) 
     glBegin(GL_QUADS)
     glVertex2f(570+dx, 30+dy)#f3
     glVertex2f(620+dx, 30+dy)#g3
-    glVertex2f(620+dx, 60+dy)#h1
-    glVertex2f(570+dx, 60+dy)#i1
+    glVertex2f(620+dx, 80+dy)#h1
+    glVertex2f(570+dx, 80+dy)#i1
     glEnd()
-    pass
 
 def Mobil(dx, dy):
     # glTranslated(posisiX,posisiY,0)
@@ -1234,7 +1234,7 @@ def playG():
     # MobilPlayer(xPlayer, yPlayer)
     # Mobil(xPlayer, yPlayer)
     Player(xPlayer, yPlayer)
-    Musuh(xMusuh, yRPlayer)
+    Musuh(xMusuh, yMusuh)
 
 def play_Game():
     global ScorePlayer, kecepatan, cek_Kecepatan
