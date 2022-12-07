@@ -23,7 +23,7 @@ yMusuh = 0
 xRintangan = 50
 
 grid_y_player = [0,125, 0,120]
-# yRPlayer = rd.randrange(50, 200)
+yRPlayer = rd.randrange(50, 200)
 
 jumlah_bintang = 1000
 jedag, jedug = 1, 1
@@ -574,9 +574,11 @@ def GameOver():
     kelapKelip(), Ulang(), Game(), Over()
 
 def Player(cx, cy):
-    global xPlayer, yPlayer, xMusuh, yMusuh, crash_Player
+    global xPlayer, yPlayer, xMusuh, yMusuh, crash_Player, yRPlayer
 
     # if xPlayer==xMusuh and yPlayer-50<=yMusuh<=yPlayer+50:
+    #     crash_Player = True
+    # if yPlayer in range(yRPlayer-50, yRPlayer+50) and xMusuh < -390:
     #     crash_Player = True
 
     def circle1(cx,cy,r,num_segment):
@@ -810,19 +812,22 @@ def Player(cx, cy):
     circle4(150+cx,32+cy,7,360)
 
 def Musuh(dx, dy):
-    global xMusuh, yMusuh, yRPlayer, selesai
+    global xMusuh, yMusuh, yRPlayer, selesai, crash_Player, yPlayer, xPlayer
 
     # if not selesai:
-    #     if yMusuh > 300:
-    #         yMusuh = 300
-    #     if yMusuh < 110:
-    #         yMusuh = 110
+    #     if dy > 200:
+    #         dy = 200
+    #     if dy < 110:
+    #         dy = 110
     
     xMusuh -= 2
     if xMusuh < -600:
         yRPlayer = rd.randrange(yMusuh -150, yMusuh +75)
         yMusuh = yRPlayer
         xMusuh = 500
+
+    # if yPlayer in range(yRPlayer-50, yRPlayer+50) and xMusuh < -390:
+    #     crash_Player = True
 
     glColor3ub(37, 188, 143) 
     glBegin(GL_QUADS)
