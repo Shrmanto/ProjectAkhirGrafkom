@@ -969,7 +969,7 @@ def Score_Player():
     drawTextNum(ScorePlayer,15,460,0,0,0) 
 
 def collisionMusuh():
-    global yPlayer, yRPlayer, xMusuh, yMusuh, crash_Player
+    global yPlayer, yRPlayer, xMusuh, yMusuh, crash_Player, selesai
     
     #Collision Musuh
     xMusuh -= 2
@@ -1047,8 +1047,6 @@ def play_Game():
     global ScorePlayer, kecepatan, cek_Kecepatan
     if crash_Player == False:
         playG()
-        # Musuh(xMusuh, yRPlayer)
-        # Rintangan(yRPlayer)
         ScorePlayer += kecepatan
 
     if crash_Player == True:
