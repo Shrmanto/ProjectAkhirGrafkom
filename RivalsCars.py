@@ -580,7 +580,7 @@ def Player(cx, cy):
     #     crash_Player = True
     # if yPlayer in range(yRPlayer-50, yRPlayer+50) and xMusuh < -390:
         # crash_Player = True
-
+    # glScaled(0.8, 0.8, 0)
     def circle1(cx,cy,r,num_segment):
         glBegin(GL_POLYGON)
         glColor3ub(96,96,96)
@@ -814,11 +814,11 @@ def Player(cx, cy):
 def Musuh(dx, dy):
     global xMusuh, yMusuh, yRPlayer, selesai, crash_Player, yPlayer, xPlayer
 
-    if not selesai:
-        if dy > 200:
-            dy = 200
-        if dy < 110:
-            dy = 110
+    # if not selesai:
+    #     if dy > 200:
+    #         dy = 200
+    #     if dy < 110:
+    #         dy = 110
     
     xMusuh -= 2
     if xMusuh < -600:
@@ -831,10 +831,10 @@ def Musuh(dx, dy):
 
     glColor3ub(37, 188, 143) 
     glBegin(GL_QUADS)
-    glVertex2f(570+dx, 30+dy)#f3
-    glVertex2f(620+dx, 30+dy)#g3
-    glVertex2f(620+dx, 80+dy)#h1
-    glVertex2f(570+dx, 80+dy)#i1
+    glVertex2f(570+dx, 20+dy)#f3
+    glVertex2f(620+dx, 20+dy)#g3
+    glVertex2f(620+dx, 60+dy)#h1
+    glVertex2f(570+dx, 60+dy)#i1
     glEnd()
 
 # def Mobil(cx,cy):
