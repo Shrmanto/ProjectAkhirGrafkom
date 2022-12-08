@@ -22,7 +22,7 @@ yMusuh = 0
 
 xRintangan = 50
 
-grid_y_player = [0,125, 0,120]
+grid_y_player = [0,205, 0,120]
 yRPlayer = rd.randrange(50, 200)
 
 jumlah_bintang = 1000
@@ -851,10 +851,10 @@ def background():
 def jalan():
     glBegin(GL_QUADS) 
     glColor3ub(160,160,160)
-    glVertex2f(0, 150)
+    glVertex2f(0, 190)
     glVertex2f(0, 0)
     glVertex2f(1000, 0)
-    glVertex2f(1000, 150)
+    glVertex2f(1000, 190)
     glEnd()
 
     def GarisTJalan(kck):
@@ -887,27 +887,27 @@ def jalan():
 
     def transMidJalan():
         def MidJalan1():
-            GMidJalan(30, 80)
+            GMidJalan(30, 100)
         def MidJalan2():
-            GMidJalan(130, 80)
+            GMidJalan(130, 100)
         def MidJalan3():
-            GMidJalan(230, 80)
+            GMidJalan(230, 100)
         def MidJalan4():
-            GMidJalan(330, 80)
+            GMidJalan(330, 100)
         def MidJalan5():
-            GMidJalan(430, 80)
+            GMidJalan(430, 100)
         def MidJalan6():
-            GMidJalan(530, 80)
+            GMidJalan(530, 100)
         def MidJalan7():
-            GMidJalan(630, 80)
+            GMidJalan(630, 100)
         def MidJalan8():
-            GMidJalan(730, 80)
+            GMidJalan(730, 100)
         def MidJalan9():
-            GMidJalan(830, 80)
+            GMidJalan(830, 100)
         def MidJalan10():
-            GMidJalan(930, 80)
+            GMidJalan(930, 100)
         def MidJalan11():
-            GMidJalan(1030, 80)
+            GMidJalan(1030, 100)
 
         MidJalan1()
         MidJalan2()
@@ -929,7 +929,7 @@ def jalan():
         glVertex2f(700, pbt)
         glEnd()
 
-    Tepi(150), Pembatas(160), Pembatas(10), GarisTJalan(80), transMidJalan()
+    Tepi(190), Pembatas(200), Pembatas(10), GarisTJalan(100), transMidJalan()
 
 def kota(zx, vy):
     global xy, Cek_xy
@@ -940,10 +940,10 @@ def kota(zx, vy):
     glTranslated(xy, 0, 0)
     glBegin(GL_QUADS) 
     glColor3ub(160,160,160) #hitam
-    glVertex2f(zx + 0, 150)
-    glVertex2f(zx + 0, vy+270)
-    glVertex2f(zx + 100, vy+270)
-    glVertex2f(zx + 100, 150)
+    glVertex2f(zx + 0, 190)
+    glVertex2f(zx + 0, vy+320)
+    glVertex2f(zx + 100, vy+320)
+    glVertex2f(zx + 100, 190)
     glEnd()
     glPopMatrix()
 
@@ -1011,19 +1011,19 @@ def key_Mobil(key, x, y):
     if key == GLUT_KEY_UP:
         if crash_Player == False:
             if yPlayer+50 > grid_y_player[1]:
-                yPlayer += 10
+                yPlayer += 15
                 crash_Player = True
             else:
-                yPlayer += 10
+                yPlayer += 15
         else:
             yPlayer += 0
     elif key == GLUT_KEY_DOWN:
         if crash_Player == False:
             if yPlayer-5 < grid_y_player[0]:
-                yPlayer -= 10
+                yPlayer -= 15
                 crash_Player = True
             else:
-                yPlayer -= 10
+                yPlayer -= 15
         else:
             yPlayer -= 0
     elif key == GLUT_KEY_RIGHT:
