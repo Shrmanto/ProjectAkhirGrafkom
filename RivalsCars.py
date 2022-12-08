@@ -820,14 +820,14 @@ def Musuh(dx, dy):
     #     if dy < 110:
     #         dy = 110
     
-    xMusuh -= 2
-    if xMusuh < -600:
-        yRPlayer = rd.randrange(yMusuh -150, yMusuh +75)
-        yMusuh = yRPlayer
-        xMusuh = 500
+    # xMusuh -= 2
+    # if xMusuh < -600:
+    #     yRPlayer = rd.randrange(yMusuh -150, yMusuh +75)
+    #     yMusuh = yRPlayer
+    #     xMusuh = 500
 
-    if yPlayer in range(yRPlayer-50, yRPlayer+50) and xMusuh < -390:
-        crash_Player = True
+    # if yPlayer in range(yRPlayer-50, yRPlayer+50) and xMusuh < -390:
+    #     crash_Player = True
 
     glColor3ub(37, 188, 143) 
     glBegin(GL_QUADS)
@@ -836,49 +836,6 @@ def Musuh(dx, dy):
     glVertex2f(620+dx, 60+dy)#h1
     glVertex2f(570+dx, 60+dy)#i1
     glEnd()
-
-# def Mobil(cx,cy):
-#     global selesai, xPlayer, yPlayer
-
-#     if not selesai:
-#         if xPlayer > 500:
-#             xPlayer = 500
-#         if xPlayer < -0:
-#             xPlayer = -0
-#     glColor3ub(255, 255, 255)
-#     glBegin(GL_QUADS)
-#     glVertex2f(20+cx, 30+cy)
-#     glVertex2f(20+cx, 60+cy)
-#     glVertex2f(80+cx, 60+cy)
-#     glVertex2f(80+cx, 30+cy)
-#     glEnd()
-
-def Rintangan(y):
-    glPushMatrix()
-    global xRintangan, yRPlayer, xPlayer, yPlayer, crash_Player
-
-    if not selesai:
-        if y > 300:
-            y = 300
-        if y < 110:
-            y = 110
-
-    xRintangan -= 2
-    if xRintangan < -600:
-        y = 100
-        # yRPlayer = rd.randrange(y -200, y +50)
-        xRintangan = 500
-
-    # if yPlayer in range(yRPlayer-100, yRPlayer+100) and xRintangan < -390:
-    #     crash_Player = True
-
-    glTranslated(xRintangan,y,0)
-    glPointSize(40)
-    glBegin(GL_POINTS)
-    glColor3ub(37, 188, 143) 
-    glVertex2f(550+xRintangan, y)
-    glEnd()
-    glPopMatrix()
 
 def background():
     glPushMatrix()
@@ -1031,6 +988,24 @@ def Score_Player():
     drawText('SCORE : ',15,480,0,0,0)
     drawTextNum(ScorePlayer,15,460,0,0,0) 
 
+def collisionMusuh():
+    global yPlayer, yRPlayer, xMusuh, yMusuh, crash_Player
+    
+    xMusuh -= 2
+    if xMusuh < -600:
+        yRPlayer = rd.randrange(yMusuh -150, yMusuh +75)
+        yMusuh = yRPlayer
+        xMusuh = 500
+        
+    if yPlayer in range(yRPlayer-50, yRPlayer+50) and xMusuh < -390:
+        crash_Player = True
+
+    if not selesai:
+        if yMusuh > 150:
+            yMusuh = 150
+        if yMusuh < 10:
+            yMusuh = 10
+
 def key_Mobil(key, x, y):
     global xPlayer, yPlayer, crash_Player, play
     if key == GLUT_KEY_UP:
@@ -1071,6 +1046,7 @@ def inputMouse(button, state, x,y):
     global play
 
     if button == GLUT_LEFT_BUTTON:
+        # if (x >= 200 and x <= 400) and (y >= 100 and y <=160):
         play = True
 
 def playG():
@@ -1083,6 +1059,7 @@ def playG():
     # Mobil(xPlayer, yPlayer)
     Player(xPlayer, yPlayer)
     Musuh(xMusuh, yMusuh)
+    collisionMusuh()
 
 def play_Game():
     global ScorePlayer, kecepatan, cek_Kecepatan
