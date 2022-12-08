@@ -576,11 +576,6 @@ def GameOver():
 def Player(cx, cy):
     global xPlayer, yPlayer, xMusuh, yMusuh, crash_Player, yRPlayer
 
-    # if xPlayer==xMusuh and yPlayer-50<=yMusuh<=yPlayer+50:
-    #     crash_Player = True
-    # if yPlayer in range(yRPlayer-50, yRPlayer+50) and xMusuh < -390:
-        # crash_Player = True
-    # glScaled(0.8, 0.8, 0)
     def circle1(cx,cy,r,num_segment):
         glBegin(GL_POLYGON)
         glColor3ub(96,96,96)
@@ -814,21 +809,6 @@ def Player(cx, cy):
 def Musuh(dx, dy):
     global xMusuh, yMusuh, yRPlayer, selesai, crash_Player, yPlayer, xPlayer
 
-    # if not selesai:
-    #     if dy > 200:
-    #         dy = 200
-    #     if dy < 110:
-    #         dy = 110
-    
-    # xMusuh -= 2
-    # if xMusuh < -600:
-    #     yRPlayer = rd.randrange(yMusuh -150, yMusuh +75)
-    #     yMusuh = yRPlayer
-    #     xMusuh = 500
-
-    # if yPlayer in range(yRPlayer-50, yRPlayer+50) and xMusuh < -390:
-    #     crash_Player = True
-
     glColor3ub(37, 188, 143) 
     glBegin(GL_QUADS)
     glVertex2f(570+dx, 20+dy)#f3
@@ -991,18 +971,21 @@ def Score_Player():
 def collisionMusuh():
     global yPlayer, yRPlayer, xMusuh, yMusuh, crash_Player
     
+    #Collision Musuh
     xMusuh -= 2
     if xMusuh < -600:
         yRPlayer = rd.randrange(yMusuh -150, yMusuh +75)
         yMusuh = yRPlayer
         xMusuh = 500
         
+    #Collision Musuh dengan Player
     if yPlayer in range(yRPlayer-50, yRPlayer+50) and xMusuh < -390:
         crash_Player = True
 
+    #Collision Batas Musuh
     if not selesai:
-        if yMusuh > 150:
-            yMusuh = 150
+        if yMusuh > 160:
+            yMusuh = 160
         if yMusuh < 10:
             yMusuh = 10
 
@@ -1039,8 +1022,7 @@ def key_Mobil(key, x, y):
 
     # elif ord(key) == ord(b'\r'):
     #     play = False
-
-    #     # crash_Player = False  
+    #     crash_Player = False  
 
 def inputMouse(button, state, x,y):
     global play
