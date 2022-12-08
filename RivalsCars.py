@@ -13,16 +13,16 @@ crash_Player = False
 xy = 0
 xc = 0
 Cek_xy = 20
-
+#Player
 xPlayer = 0
 yPlayer = 35
-
+#Musuh
 xMusuh = 0
 yMusuh = 0
-
 xRintangan = 50
-
-grid_y_player = [0,205, 0,120]
+#Pembatas
+grid_y_player = [0,160, 0,115]
+#RandomMusuh
 yRPlayer = rd.randrange(50, 200)
 
 jumlah_bintang = 1000
@@ -31,6 +31,7 @@ jedag, jedug = 1, 1
 ScorePlayer = 0
 kecepatan = 1
 
+#Draw Text
 def drawText(ch,xpos,ypos,r,b,g):
     color = (r, b, g)
     font_style = glut.GLUT_BITMAP_8_BY_13
@@ -59,15 +60,6 @@ def drawTextBold(ch,xpos,ypos):
           glutBitmapCharacter(font_style, ord(i))  
     glPopMatrix()  
 
-def bg_text(fx,gy):
-    glColor3ub(255, 0, 0)     
-    glBegin(GL_QUADS)
-    glVertex2f(285+fx,230+gy)
-    glVertex2f(495+fx,230+gy)
-    glVertex2f(495+fx,280+gy)
-    glVertex2f(285+fx,280+gy)
-    glEnd()
-
 def drawTextNum(skor,xpos,ypos,r,b,g):
     color = (r, b, g)
     font_style = glut.GLUT_BITMAP_8_BY_13
@@ -81,6 +73,7 @@ def drawTextNum(skor,xpos,ypos,r,b,g):
        else:
           glutBitmapCharacter(font_style, ord(i))
 
+#Menu/GameOver
 def mainMenu():
     glBegin(GL_QUADS)
     glColor3ub(135, 206, 235) 
@@ -573,6 +566,8 @@ def GameOver():
     
     kelapKelip(), Ulang(), Game(), Over()
 
+#Asset Game
+#MobilPlayer
 def Player(cx, cy):
     global xPlayer, yPlayer, xMusuh, yMusuh, crash_Player, yRPlayer
 
@@ -805,7 +800,7 @@ def Player(cx, cy):
     circle3(55+cx,32+cy,7,360)
     circle2(150+cx,32+cy,12,360)
     circle4(150+cx,32+cy,7,360)
-
+#Musuh/Rintangan
 def Musuh(dx, dy):
     global xMusuh, yMusuh, yRPlayer, selesai, crash_Player, yPlayer, xPlayer
 
@@ -827,7 +822,7 @@ def background():
     glVertex2f(700, 0)
     glEnd()
     glPopMatrix()
-
+#Jalan
 def jalan():
     glBegin(GL_QUADS) 
     glColor3ub(160,160,160)
@@ -910,7 +905,7 @@ def jalan():
         glEnd()
 
     Tepi(190), Pembatas(200), Pembatas(10), GarisTJalan(100), transMidJalan()
-
+#Kota
 def kota(zx, vy):
     global xy, Cek_xy
     glPushMatrix()
@@ -950,7 +945,7 @@ def transKota():
         kota(940, -10)
     
     kota1(), kota2(),kota3(),kota4(),kota5(),kota6(),kota7(),kota8(),kota9(),kota10()
-
+#Salju
 def salju():
     glPointSize(15)
     glColor3f(1.0, 1.0, 1.0) #RGB
@@ -963,18 +958,18 @@ def salju():
             x = x
         y -= 50
     glEnd()
-
+#Score
 def Score_Player():
     drawText('SCORE : ',15,480,0,0,0)
     drawTextNum(ScorePlayer,15,460,0,0,0) 
-
+#Logika
 def collisionMusuh():
     global yPlayer, yRPlayer, xMusuh, yMusuh, crash_Player, selesai
     
     #Collision Musuh
     xMusuh -= 2
     if xMusuh < -600:
-        yRPlayer = rd.randrange(yMusuh -150, yMusuh +75)
+        yRPlayer = rd.randrange(yMusuh -250, yMusuh +125)
         yMusuh = yRPlayer
         xMusuh = 500
         
@@ -1028,9 +1023,9 @@ def inputMouse(button, state, x,y):
     global play
 
     if button == GLUT_LEFT_BUTTON:
-        # if (x >= 200 and x <= 400) and (y >= 100 and y <=160):
-        play = True
-
+        if (x >= 200 and x <= 400) and (y >= 340 and y <=420):
+            play = True
+#Play
 def playG():
     background()
     transKota()
